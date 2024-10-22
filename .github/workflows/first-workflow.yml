@@ -10,7 +10,7 @@ jobs:
     job1:
         runs-on: ubuntu-latest
         env: 
-            MY_JOB_VAR: 'Step 2 complete!'
+            MY_JOB_VAR: 'job variable is working!'
         steps:
             - name: Step 1
               run: echo 'Step 1 complete!'
