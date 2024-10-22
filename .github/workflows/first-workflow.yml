@@ -1,5 +1,6 @@
 name: First Workflow
-
+env:
+    MY_GLB_VAR: 'what does the cow say?'
 on:
     workflow_dispatch:
     issues:
@@ -8,18 +9,22 @@ on:
 jobs:
     job1:
         runs-on: ubuntu-latest
+        env: 
+            MY_JOB_VAR: 'Step 2 complete!'
         steps:
             - name: Step 1
-              run: echo "Step 1 complete!"
+              run: echo 'Step 1 complete!'
             - name: Step 2
-              run: echo "Step 2 complete!"
+              run: echo ${{ env.MY_JOB_VAR }}
     job2:
         needs: job1
         name: Cowsays
         runs-on: ubuntu-latest
         steps:
+        - name: question
+          run: echo ${{ env.MY_GLB_VAR }}
         - name: Ship it
           uses: mscoutermarsh/cowsays-action@master
           with:
-              text: "Ready for prod-ship it!"
-              color: "magenta"
+              text: 'Ready for prod-ship it!'
+              color: 'magenta'
